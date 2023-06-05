@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577223627494",
+    "project_id": "grand-flutter-project-mywrit",
+    "storage_bucket": "grand-flutter-project-mywrit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577223627494:android:3a88ca4ba1036159c5e127",
+        "android_client_info": {
+          "package_name": "com.example.tuto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCqPjFeaOHNi6JZWQ1cYetCGIKUebSeQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
