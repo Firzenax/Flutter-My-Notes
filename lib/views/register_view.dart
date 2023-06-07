@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tuto/constants/routes.dart';
+import 'package:tuto/services/auth/auth_exceptions.dart';
+import 'package:tuto/services/auth/auth_service.dart';
 import 'package:tuto/utilities/show_error_dialog.dart';
 
 class RegisterView extends StatefulWidget {
@@ -58,23 +59,20 @@ class _RegisterViewState extends State<RegisterView> {
               final password = _password.text;
 
               try {
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: email, password: password);
-                final user = FirebaseAuth.instance.currentUser;
-                user?.sendEmailVerification();
+                await AuthService.firebase()
+                    .createUser(email: email, password: password);
+                AuthService.firebase().sendEmailVerification();
                 if (context.mounted) {
                   Navigator.of(context).pushNamed(verifyEmailRoute);
                 }
-              } on FirebaseAuthException catch (e) {
-                if (e.message!.contains("email-already-in-use")) {
-                  showErrorDialog(context, "Email is already used");
-                } else if (e.message!.contains("weak-password")) {
-                  showErrorDialog(context, "Password too weak");
-                } else if (e.message!.contains("invalid-email")) {
-                  showErrorDialog(context, "Invalid email");
-                } else {
-                  showErrorDialog(context, e.toString());
-                }
+              } on EmailAlreadyInUseAuthException {
+                showErrorDialog(context, "Email is already used");
+              } on WeakPasswordAuthException {
+                showErrorDialog(context, "Password too weak");
+              } on InvalidEmailAuthException {
+                showErrorDialog(context, "Invalid email");
+              } on GenericAuthException {
+                showErrorDialog(context, "Failed to register");
               }
             },
             child: const Text("Register"),
