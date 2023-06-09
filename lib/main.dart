@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:tuto/constants/routes.dart';
 import 'package:tuto/services/auth/auth_service.dart';
 import 'package:tuto/views/login_view.dart';
-import 'package:tuto/views/notes_view.dart';
+import 'package:tuto/views/notes/new_note_view.dart';
+import 'package:tuto/views/notes/notes_view.dart';
 import 'package:tuto/views/register_view.dart';
 import 'package:tuto/views/verify_email_view.dart';
-
-import 'firebase_options.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,8 @@ void main() {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
         notesRoute: (context) => const NoteView(),
-        verifyEmailRoute: (context) => const VerifyEmailView()
+        verifyEmailRoute: (context) => const VerifyEmailView(),
+        newNoteRoute: (context) => const NewNoteView(),
       }));
 }
 
